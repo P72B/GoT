@@ -86,3 +86,4 @@ lint/tmp/
 /build
 /captures
 .cxx
+/app/signing.properties
