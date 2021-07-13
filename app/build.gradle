@@ -88,8 +88,7 @@ android {
 }
 
 dependencies {
-    implementation project(':library:design')
-
+    implementation project(':feature:house')
     implementation "androidx.activity:activity-compose:$activity_compose_version"
     implementation "com.google.android.material:material:1.4.0"
     implementation "io.insert-koin:koin-android:$koin_version"

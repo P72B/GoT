@@ -14,7 +14,7 @@ class Repository(
     }
 
     private fun mapHouses(input: List<HouseResponse>): List<House> {
-        return input.map {
+        return input.filter { it.name != null }.map {
             houseMapper.map(it)
         }
     }

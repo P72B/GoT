@@ -7,6 +7,6 @@ class HouseMapper : Mapper<HouseResponse, House> {
 
     override fun map(input: HouseResponse): House =
         House(
-            name = input.name
+            name = input.name!!
         )
 }

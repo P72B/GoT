@@ -8,6 +8,11 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         debug {
             debuggable true
@@ -17,11 +22,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        useIR = true
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerVersion kotlin_version
+    }
 }
 
 dependencies {
+    implementation project(':library:design')
+    implementation project(':library:core')
     implementation project(':library:data')
     implementation project(':library:useCase')
 
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
+    implementation "androidx.activity:activity-compose:$activity_compose_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
 }
