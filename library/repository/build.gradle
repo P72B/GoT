@@ -6,6 +6,7 @@ plugins {
 android {
     defaultConfig {
         consumerProguardFiles "consumer-rules.pro"
+        buildConfigField "String", "ICE_AND_FIRE_BASE_URL", "\"https://anapioficeandfire.com/\""
     }
 
     buildTypes {
@@ -20,5 +21,10 @@ android {
 }
 
 dependencies {
+    implementation project(':library:data')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
 }
