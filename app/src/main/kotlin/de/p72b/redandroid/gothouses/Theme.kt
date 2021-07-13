@@ -7,6 +7,7 @@ import de.p72b.redandroid.got.design.ui.theme.Shapes
 import de.p72b.redandroid.got.design.ui.theme.Typography
 import de.p72b.redandroid.got.design.ui.theme.colors
 
+// TODO: needs to be stored in design lib
 @Composable
 fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     MaterialTheme(

@@ -20,5 +20,9 @@ android {
 }
 
 dependencies {
+    implementation project(':library:data')
+    implementation project(':library:repository')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "io.insert-koin:koin-android:$koin_version"
 }
