@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import de.p72b.redandroid.got.core.R
 import de.p72b.redandroid.got.design.ui.theme.AppTheme
 import de.p72b.redandroid.got.design.ui.theme.DIMEN_16
@@ -54,7 +55,7 @@ class HouseDetailsActivity : ComponentActivity() {
         TopAppBar(
             title = {
                 Text(
-                    text = getString(R.string.title_house_details),
+                    text = stringResource(R.string.title_house_details),
                     style = MaterialTheme.typography.h1
                 )
             },

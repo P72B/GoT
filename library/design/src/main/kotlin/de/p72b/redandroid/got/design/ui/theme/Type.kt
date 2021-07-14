@@ -11,12 +11,12 @@ import de.p72b.redandroid.got.design.R
 
 val latoFamily = FontFamily(
     Font(R.font.lato_light, FontWeight.Light),
-    Font(R.font.lato, FontWeight.Normal),
-    Font(R.font.lato, FontWeight.Normal, FontStyle.Italic),
+    Font(R.font.lato_regular, FontWeight.Normal),
+    Font(R.font.lato_italic, FontWeight.Normal, FontStyle.Italic),
     Font(R.font.lato_bold, FontWeight.Bold)
 )
 
-val Typography = Typography(
+val LatoTypography = Typography(
     body1 = TextStyle(
         fontFamily = latoFamily,
         fontWeight = FontWeight.Normal,
@@ -45,12 +45,12 @@ val Typography = Typography(
     ),
     h1 = TextStyle(
         fontFamily = latoFamily,
-        fontWeight = FontWeight.Light,
+        fontWeight = FontWeight.Bold,
         fontSize = 22.sp
     ),
     h2 = TextStyle(
         fontFamily = latoFamily,
-        fontWeight = FontWeight.Light,
+        fontWeight = FontWeight.Bold,
         lineHeight = 6.sp,
         letterSpacing = 0.sp,
         fontSize = 20.sp

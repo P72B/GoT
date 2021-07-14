@@ -25,6 +25,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import de.p72b.redandroid.got.core.R
 import de.p72b.redandroid.got.core.observeAction
@@ -79,7 +80,7 @@ class HouseListActivity : ComponentActivity() {
         TopAppBar(
             title = {
                 Text(
-                    text = getString(R.string.title_house_list),
+                    text = stringResource(R.string.title_house_list),
                     style = MaterialTheme.typography.h1
                 )
             }
@@ -102,7 +103,7 @@ class HouseListActivity : ComponentActivity() {
                         end = DIMEN_16,
                         start = DIMEN_16
                     ),
-                    text = getString(R.string.sub_title_house_list),
+                    text = stringResource(R.string.sub_title_house_list),
                     style = MaterialTheme.typography.h2
                 )
                 Box(modifier = Modifier.fillMaxSize()) {

@@ -16,7 +16,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class HouseListActivityTest {
+class HouseListViewModelTest {
 
     private val getHousesUseCaseMock = mockk<GetHousesUseCase>()
     private val sampleHouseList = listOf(House("A"), House("B"))

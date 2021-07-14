@@ -31,7 +31,7 @@ private fun colors(isDarkTheme: Boolean): Colors {
 fun AppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     MaterialTheme(
         colors = colors(darkTheme),
-        typography = Typography,
+        typography = LatoTypography,
         shapes = Shapes,
         content = content
     )
