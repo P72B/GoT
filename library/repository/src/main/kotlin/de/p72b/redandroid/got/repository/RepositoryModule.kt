@@ -1,5 +1,6 @@
 package de.p72b.redandroid.got.repository
 
+import de.p72b.redandroid.got.repository.http.VersionInterceptor
 import de.p72b.redandroid.got.repository.http.createAdapter
 import de.p72b.redandroid.got.repository.http.createHttpCache
 import de.p72b.redandroid.got.repository.mapper.HouseMapper
@@ -14,7 +15,10 @@ private val repositoryModule = module {
 
     single {
         Repository(
-            api = createAdapter(get()),
+            api = createAdapter(
+                cache = get(),
+                versionInterceptor = VersionInterceptor()
+            ),
             houseMapper = HouseMapper()
         )
     }

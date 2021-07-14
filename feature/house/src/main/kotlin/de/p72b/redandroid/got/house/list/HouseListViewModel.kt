@@ -12,7 +12,7 @@ import de.p72b.redandroid.got.usecase.GetHousesUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-const val PAGE_SIZE = 50
+const val PAGE_SIZE = 30
 
 class HouseListViewModel(
     private val getHousesUseCase: GetHousesUseCase
@@ -27,7 +27,7 @@ class HouseListViewModel(
     init {
         viewModelScope.launch {
             isLoading.value = true
-            delay(500)
+            delay(300)
             appendItems(getHousesUseCase.invoke(page.value, PAGE_SIZE))
             isLoading.value = false
         }
@@ -43,7 +43,7 @@ class HouseListViewModel(
                 isLoading.value = true
                 incrementPage()
                 if (page.value > 1) {
-                    delay(200)
+                    delay(100)
                     appendItems(getHousesUseCase.invoke(page.value, PAGE_SIZE))
                 }
                 isLoading.value = false

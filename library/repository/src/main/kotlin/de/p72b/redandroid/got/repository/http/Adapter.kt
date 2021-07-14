@@ -14,8 +14,10 @@ fun createHttpCache(application: Application): Cache {
     return Cache(application.applicationContext.cacheDir, CACHE_SIZE)
 }
 
-fun createAdapter(cache: Cache): IceAndFireApi {
-    val client = OkHttpClient.Builder().cache(cache)
+fun createAdapter(cache: Cache, versionInterceptor: VersionInterceptor): IceAndFireApi {
+    val client = OkHttpClient.Builder()
+        .cache(cache)
+        .addInterceptor(versionInterceptor)
     val gson = GsonBuilder()
         .create()
 
