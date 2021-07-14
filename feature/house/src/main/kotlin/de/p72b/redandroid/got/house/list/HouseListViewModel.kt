@@ -26,10 +26,10 @@ class HouseListViewModel(
     }
 
     fun onItemClicked(item: House) {
-        // TODO
+        viewAction.postValue(ViewAction.ShowHouseDetails(item))
     }
 
     sealed class ViewAction : Action {
-        object ShowHouseDetails : ViewAction()
+        data class ShowHouseDetails(val item: House) : ViewAction()
     }
 }

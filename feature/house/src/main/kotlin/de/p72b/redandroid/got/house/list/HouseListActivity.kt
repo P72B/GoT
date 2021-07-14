@@ -1,5 +1,6 @@
 package de.p72b.redandroid.got.house.list
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,11 +19,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import de.p72b.redandroid.got.core.R
 import de.p72b.redandroid.got.core.observeAction
 import de.p72b.redandroid.got.data.House
 import de.p72b.redandroid.got.design.ui.theme.AppTheme
 import de.p72b.redandroid.got.design.ui.theme.DIMEN_16
+import de.p72b.redandroid.got.design.ui.theme.DIMEN_8
+import de.p72b.redandroid.got.house.Constants
+import de.p72b.redandroid.got.house.details.HouseDetailsActivity
 import de.p72b.redandroid.got.house.list.HouseListViewModel.ViewAction.ShowHouseDetails
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -45,7 +49,11 @@ class HouseListActivity : ComponentActivity() {
     private fun observeViewAction() {
         observeAction(viewModel.viewAction) { action ->
             when (action) {
-                is ShowHouseDetails -> finish()
+                is ShowHouseDetails -> {
+                    startActivity(Intent(this, HouseDetailsActivity::class.java).apply {
+                        putExtra(Constants.EXTRA_HOUSE, action.item)
+                    })
+                }
             }
         }
     }
@@ -55,7 +63,7 @@ class HouseListActivity : ComponentActivity() {
         TopAppBar(
             title = {
                 Text(
-                    text = "TODO",
+                    text = getString(R.string.title_house_list),
                     style = MaterialTheme.typography.h1
                 )
             }
@@ -67,10 +75,6 @@ class HouseListActivity : ComponentActivity() {
         Surface(color = MaterialTheme.colors.background) {
             Column(
                 modifier = Modifier
-                    .padding(
-                        end = DIMEN_16,
-                        start = DIMEN_16
-                    )
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
             ) {
@@ -81,6 +85,16 @@ class HouseListActivity : ComponentActivity() {
 
     @Composable
     private fun HouseList() {
+        Text(
+            modifier = Modifier.padding(
+                top = DIMEN_16,
+                bottom = DIMEN_8,
+                end = DIMEN_16,
+                start = DIMEN_16
+            ),
+            text = getString(R.string.sub_title_house_list),
+            style = MaterialTheme.typography.h2
+        )
         val items: State<List<House>> = viewModel.items.observeAsState(listOf())
         List(items = items.value)
     }
@@ -105,9 +119,14 @@ class HouseListActivity : ComponentActivity() {
         ) {
             Column {
                 Text(
-                    modifier = Modifier.padding(bottom = 4.dp),
-                    text = item.name,
-                    style = MaterialTheme.typography.body1
+                    modifier = Modifier.padding(
+                        bottom = DIMEN_8,
+                        top = DIMEN_8,
+                        end = DIMEN_16,
+                        start = DIMEN_16
+                    ),
+                    text = item.getDisplayedName(),
+                    style = MaterialTheme.typography.subtitle1
                 )
             }
         }
