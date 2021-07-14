@@ -9,8 +9,8 @@ class Repository(
     private val api: IceAndFireApi,
     private val houseMapper: Mapper<HouseResponse, House>
 ) {
-    suspend fun getHouses(): List<House> {
-        return mapHouses(api.getHouses())
+    suspend fun getHouses(page: Int, pageSize: Int): List<House> {
+        return mapHouses(api.getHouses(page, pageSize))
     }
 
     private fun mapHouses(input: List<HouseResponse>): List<House> {
