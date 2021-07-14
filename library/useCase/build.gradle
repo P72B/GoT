@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation project(':library:core')
     implementation project(':library:data')
     implementation project(':library:repository')
 

@@ -2,25 +2,19 @@ package de.p72b.redandroid.got.house.list
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -41,6 +35,7 @@ import de.p72b.redandroid.got.design.ui.theme.DIMEN_8
 import de.p72b.redandroid.got.house.Constants
 import de.p72b.redandroid.got.house.details.HouseDetailsActivity
 import de.p72b.redandroid.got.house.list.HouseListViewModel.ViewAction.ShowHouseDetails
+import de.p72b.redandroid.got.house.list.HouseListViewModel.ViewAction.ShowNetworkError
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HouseListActivity : ComponentActivity() {
@@ -66,6 +61,9 @@ class HouseListActivity : ComponentActivity() {
                     startActivity(Intent(this, HouseDetailsActivity::class.java).apply {
                         putExtra(Constants.EXTRA_HOUSE, action.item)
                     })
+                }
+                is ShowNetworkError -> {
+                    Toast.makeText(this, "Network issues", Toast.LENGTH_LONG).show()
                 }
             }
         }

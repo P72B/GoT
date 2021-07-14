@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import de.p72b.redandroid.got.core.Action
 import de.p72b.redandroid.got.core.SingleLiveEvent
+import de.p72b.redandroid.got.core.network.Resource
+import de.p72b.redandroid.got.core.network.Status.ERROR
+import de.p72b.redandroid.got.core.network.Status.SUCCESS
 import de.p72b.redandroid.got.data.House
 import de.p72b.redandroid.got.usecase.GetHousesUseCase
 import kotlinx.coroutines.delay
@@ -28,7 +31,7 @@ class HouseListViewModel(
         viewModelScope.launch {
             isLoading.value = true
             delay(300)
-            appendItems(getHousesUseCase.invoke(page.value, PAGE_SIZE))
+            handleResult(getHousesUseCase.invoke(page.value, PAGE_SIZE))
             isLoading.value = false
         }
     }
@@ -44,7 +47,7 @@ class HouseListViewModel(
                 incrementPage()
                 if (page.value > 1) {
                     delay(100)
-                    appendItems(getHousesUseCase.invoke(page.value, PAGE_SIZE))
+                    handleResult(getHousesUseCase.invoke(page.value, PAGE_SIZE))
                 }
                 isLoading.value = false
             }
@@ -53,6 +56,20 @@ class HouseListViewModel(
 
     fun onChangeScrollPosition(position: Int) {
         scrollPosition = position
+    }
+
+    private fun handleResult(result: Resource<List<House>>) {
+        when (result.status) {
+            SUCCESS -> {
+                result.data?.let {
+                    appendItems(it)
+                }
+            }
+            ERROR -> {
+                // TODO: retry mechanism here
+                viewAction.postValue(ViewAction.ShowNetworkError)
+            }
+        }
     }
 
     private fun incrementPage() {
@@ -67,5 +84,6 @@ class HouseListViewModel(
 
     sealed class ViewAction : Action {
         data class ShowHouseDetails(val item: House) : ViewAction()
+        object ShowNetworkError : ViewAction()
     }
 }
