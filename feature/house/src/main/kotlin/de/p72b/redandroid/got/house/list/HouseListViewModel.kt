@@ -12,13 +12,14 @@ import de.p72b.redandroid.got.core.network.Status.ERROR
 import de.p72b.redandroid.got.core.network.Status.SUCCESS
 import de.p72b.redandroid.got.data.House
 import de.p72b.redandroid.got.usecase.GetHousesUseCase
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 const val PAGE_SIZE = 30
 
 class HouseListViewModel(
-    private val getHousesUseCase: GetHousesUseCase
+    private val getHousesUseCase: GetHousesUseCase,
+    private val defaultDispatcher: CoroutineDispatcher
 ) : ViewModel(), LifecycleObserver {
 
     val viewAction = SingleLiveEvent<ViewAction>()
@@ -28,10 +29,10 @@ class HouseListViewModel(
     private var scrollPosition = 0
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(defaultDispatcher) {
             isLoading.value = true
-            delay(300)
-            handleResult(getHousesUseCase.invoke(page.value, PAGE_SIZE))
+            val result = getHousesUseCase.invoke(page.value, PAGE_SIZE)
+            handleResult(result)
             isLoading.value = false
         }
     }
@@ -41,12 +42,11 @@ class HouseListViewModel(
     }
 
     fun nextPage() {
-        viewModelScope.launch {
+        viewModelScope.launch(defaultDispatcher) {
             if ((scrollPosition + 1) >= (page.value * PAGE_SIZE)) {
                 isLoading.value = true
                 incrementPage()
                 if (page.value > 1) {
-                    delay(100)
                     handleResult(getHousesUseCase.invoke(page.value, PAGE_SIZE))
                 }
                 isLoading.value = false

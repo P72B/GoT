@@ -6,6 +6,4 @@ import de.p72b.redandroid.got.data.House
 
 class HouseDetailsViewModel(
     val house: House
-) : ViewModel(), LifecycleObserver {
-
-}
+) : ViewModel(), LifecycleObserver
