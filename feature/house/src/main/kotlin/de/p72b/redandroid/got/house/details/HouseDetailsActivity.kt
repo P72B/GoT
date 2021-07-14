@@ -11,6 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -36,16 +37,20 @@ class HouseDetailsActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                Column {
-                    Head()
-                    Body()
-                }
+                Scaffold(
+                    topBar = {
+                        TopBar()
+                    },
+                    content = {
+                        Body()
+                    }
+                )
             }
         }
     }
 
     @Composable
-    private fun Head() {
+    private fun TopBar() {
         TopAppBar(
             title = {
                 Text(

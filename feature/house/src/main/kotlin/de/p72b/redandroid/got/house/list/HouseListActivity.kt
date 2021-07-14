@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -45,10 +46,14 @@ class HouseListActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                Column {
-                    Head()
-                    Body()
-                }
+                Scaffold(
+                    topBar = {
+                        TopBar()
+                    },
+                    content = {
+                        Body()
+                    }
+                )
             }
         }
         observeViewAction()
@@ -63,14 +68,14 @@ class HouseListActivity : ComponentActivity() {
                     })
                 }
                 is ShowNetworkError -> {
-                    Toast.makeText(this, "Network issues", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.error_network), Toast.LENGTH_LONG).show()
                 }
             }
         }
     }
 
     @Composable
-    private fun Head() {
+    private fun TopBar() {
         TopAppBar(
             title = {
                 Text(
