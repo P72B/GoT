@@ -3,4 +3,8 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
     testImplementation "junit:junit:$junit_version"
     testImplementation "io.mockk:mockk:$mockk_version"
+
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    api "io.insert-koin:koin-test:$koin_version"
+    api "io.insert-koin:koin-test-junit4:$koin_version"
 }

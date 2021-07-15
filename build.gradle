@@ -42,6 +42,13 @@ subprojects {
     afterEvaluate { project ->
         if (project.plugins.findPlugin('android') ?: project.plugins.findPlugin('android-library')) {
             android {
+                defaultConfig {
+                    minSdkVersion min_sdk_version
+                }
+                packagingOptions {
+                    exclude 'META-INF/AL2.0'
+                    exclude 'META-INF/LGPL2.1'
+                }
                 compileSdkVersion compile_sdk_version
 
                 sourceSets {

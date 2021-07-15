@@ -7,6 +7,8 @@ apply from: '../../testing_dependencies.gradle'
 android {
     defaultConfig {
         consumerProguardFiles "consumer-rules.pro"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
